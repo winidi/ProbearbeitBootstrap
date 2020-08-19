@@ -55,6 +55,11 @@ export default {
 }
 </script>
 <style >
+
+.container {
+    padding-bottom: 3.2em;
+}
+
 .adminbutton {
     
     margin-left: 2em;

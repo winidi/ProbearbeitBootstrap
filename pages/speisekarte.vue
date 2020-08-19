@@ -127,7 +127,9 @@ export default {
 
 <style scoped>
 
-
+.container{
+    padding-bottom: 3.2em;
+}
 
 .btn{
     margin-top: auto;
