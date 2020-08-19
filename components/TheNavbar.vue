@@ -3,7 +3,7 @@
   <b-navbar toggleable="lg" type="dark" variant="dark">
 
     <b-navbar-brand>
-       <b-link class="logo-link"  :to="''"> Leo's Restaurant </b-link>
+       <b-link class="logo-link"  :to="'/'"> Leo's Restaurant </b-link>
     </b-navbar-brand>
     
 

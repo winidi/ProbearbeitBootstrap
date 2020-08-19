@@ -2,14 +2,20 @@
 
     <footer class="page-footer font-small fixed-bottom">
 
-  <!-- Copyright -->
-  
-  <!-- Copyright -->
-   <div class="footer-copyright text-right py-3">
-      
-             <b-link class="nav-link" :to="'admin'">Admin</b-link>
+        <div class="row">
+
+          <div class="col-sm-1">
+
+ <b-link class="nav-link" :to="'admin'">Admin</b-link>
         
-  </div>
+  
+          </div>
+
+
+        </div>
+   
+      
+            
 
 </footer>
 </template>
