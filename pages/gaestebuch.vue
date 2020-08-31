@@ -38,7 +38,7 @@ export default {
 
            
             gastbuch: [
-              {id: 1, name: 'Leo', text: 'Der erste Eintrag'},
+              {id: 1, name: 'Leo', text: 'Das ist der erste Eintrag'},
            
             ],
             
