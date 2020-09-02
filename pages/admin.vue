@@ -2,55 +2,80 @@
     <div class="container">
         <h1>Admin Bereich</h1>
 
-        <div class="eintraege">
-                <ul v-for="(gast, index) in gastbuch" :key="index">
-                    <hr>
-
-                 <p class="pgast">
+         <div class="eintraege" :key="componentKey">
+                <ul v-for="comment in usercomments" :key="comment.id">
+                <hr>
+                
+                <p class="pgast">
                 <label>name:<br></label>
-                <input class="center-block" type="text" v-model="gast.name">
+                <input class="center-block" type="text" v-model="comment.name">
                 </p>
+                
                 <label>text:<br></label>
-                <input class="center-block" type="text" v-model="gast.text">
-                    
-                    
-                <button class="edit" v-on:click="editEintrag(index)">edit</button>
-                <button class="adminbutton" v-on:click="deleteGasteintrag(index, gast.id)">Eintrag löschen</button>
+                <input class="center-block" type="text" v-model="comment.text">
+                                 
+                <button class="edit" v-on:click="editComment(comment.id, comment.name, comment.text)">edit</button>
+                <button class="adminbutton" v-on:click="deleteComment(comment.id)">Eintrag löschen</button>
               
-                </ul>
-
+                </ul>              
     	</div> 
-        
 
     </div>
 </template>
 
 
 <script>
+import axios from 'axios'
+
 export default {
     data(){
         return{
-            test: '',
+            //id: 1,
+            text: '',
             name: '',
-            gastbuch: [],
-            
+            //gastbuch: [],     
+            componentKey: 0,
         }
     },
+
+    async asyncData() {
+        const{data} = await axios.get(`http://win.cim.local:3001/usercomments`)
+        console.log(data)
+        return {usercomments:data}
+
+    },
+
    mounted() {
         this.gastbuch = JSON.parse(localStorage.getItem('STORAGE_KEY'))
     },
     methods: {
-        deleteGasteintrag: function(index) {
-            //alert(index)
-            this.gastbuch.splice(index, 1,);
-            localStorage.setItem('STORAGE_KEY', JSON.stringify(this.gastbuch));
-            this.gastbuch = JSON.parse(localStorage.getItem('STORAGE_KEY'))
+
+        async deleteComment(id) {
+            axios.delete(`http://win.cim.local:3001/usercomments/${id}`)
+            window.location.reload(true)
         },
-        editEintrag: function(index){
-            this.gastbuch.splice(index , 1, this.gastbuch[index])
-            localStorage.setItem('STORAGE_KEY', JSON.stringify(this.gastbuch));
-            this.gastbuch = JSON.parse(localStorage.getItem('STORAGE_KEY'))
-        }        
+
+        async editComment(id, uname, utext) {
+
+            let editedComment = {
+                name: uname,
+                text: utext,
+            }
+            console.log(id);
+            console.log(uname);
+            console.log(utext);
+            console.log(this.editedComment)
+            axios.put(`http://win.cim.local:3001/usercomments/${id}`, editedComment )
+
+            .then((Result) => {
+                console.log(Result);
+           })
+           .catch((error) => {
+               console.log(error);
+           })
+
+         }
+
     }
 }
 </script>
